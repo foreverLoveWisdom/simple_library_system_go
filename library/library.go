@@ -1,4 +1,4 @@
-package main
+package library
 
 // Let's apply the questions I mentioned earlier to the current library file.
 
@@ -38,45 +38,59 @@ package main
 
 // Do you have any specific plans or requirements for the library system that might necessitate the introduction of an interface? I'd be happy to help you explore those further!
 
-import "fmt"
+type Book interface {
+	GetTitle() string
+	GetAuthor() string
+	GetType() string
+}
 
-// Book struct represents a book with a title, author, and pages.
-type Book struct {
+type Ebook struct {
 	Title  string
 	Author string
-	Pages  int
 }
 
-// Library struct represents a collection of books.
-type Library struct {
-	Books []Book
+func (e *Ebook) GetTitle() string {
+	return e.Title
 }
 
-// AddBook adds a new book to the library.
-func (l Library) AddBook(title, author string, pages int) Library {
-	book := Book{
-		Title:  title,
-		Author: author,
-		Pages:  pages,
-	}
-	l.Books = append(l.Books, book)
-	return l
+func (e *Ebook) GetAuthor() string {
+	return e.Author
 }
 
-// RemoveBook removes a book from the library by its title.
-func (l Library) RemoveBook(title string) Library {
-	for i, book := range l.Books {
-		if book.Title == title {
-			l.Books = l.Books[:i+copy(l.Books[i:], l.Books[i+1:])]
-			break
-		}
-	}
-	return l
+func (e *Ebook) GetType() string {
+	return "ebook"
 }
 
-// DisplayBooks prints out all the books in the library.
-func (l Library) DisplayBooks() {
-	for _, book := range l.Books {
-		fmt.Printf("Title: %s, Author: %s, Pages: %d\n", book.Title, book.Author, book.Pages)
-	}
+type Audiobook struct {
+	Title  string
+	Author string
+}
+
+func (a *Audiobook) GetTitle() string {
+	return a.Title
+}
+
+func (a *Audiobook) GetAuthor() string {
+	return a.Author
+}
+
+func (a *Audiobook) GetType() string {
+	return "audiobook"
+}
+
+type PhysicalBook struct {
+	title  string
+	author string
+}
+
+func (p *PhysicalBook) GetTitle() string {
+	return p.title
+}
+
+func (p *PhysicalBook) GetAuthor() string {
+	return p.author
+}
+
+func (p *PhysicalBook) GetType() string {
+	return "physical book"
 }

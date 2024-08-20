@@ -1,9 +1,11 @@
 package main
 
+import (
+	"fmt"
+	"simple_library_system_go/library"
+)
+
 func main() {
-	myLibrary := Library{}
-	myLibrary = myLibrary.AddBook("1984", "George Orwell", 328)
-	myLibrary = myLibrary.AddBook("The Hobbit", "J.R.R. Tolkien", 310)
-	myLibrary = myLibrary.RemoveBook("The Hobbit")
-	myLibrary.DisplayBooks()
+	ebook := &library.Ebook{Title: "The Great Gatsby", Author: "F. Scott Fitzgerald"}
+	fmt.Println(ebook.GetTitle(), ebook.GetAuthor(), ebook.GetType())
 }
